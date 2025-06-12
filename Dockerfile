@@ -1,4 +1,4 @@
-FROM node:13
+FROM node:13-alpine
 WORKDIR /home/wayshub
 COPY package*.json ./
 RUN npm install
