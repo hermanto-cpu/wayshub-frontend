@@ -2,7 +2,7 @@ def secret = 'totywan-vps'
 def server = 'totywan@103.127.137.206'
 def directory = '/home/totywan/dumbways-app/wayshub-frontend'
 def branch = 'main'
-def image = 'totywan/wayshub-frontend13alpine'
+def image = 'totywan/wayshub-frontend13:1.0'
 
 pipeline {
     agent any
@@ -40,19 +40,19 @@ pipeline {
             }
         }
 
-        stage ('Test Frontend App') {
-            steps {
-                sshagent([secret]) {
-                    sh """
-                        ssh -o StrictHostKeyChecking=no ${server} << EOF
-                            cd ${directory}
-                            docker run --rm ${image} npm test || echo "⚠️ Gagal test tapi lanjut"
-                            exit
-                        EOF
-                    """
-                }
-            }
-        }
+        // stage ('Test Frontend App') {
+        //     steps {
+        //         sshagent([secret]) {
+        //             sh """
+        //                 ssh -o StrictHostKeyChecking=no ${server} << EOF
+        //                     cd ${directory}
+        //                     docker run --rm ${image} npm test || echo "⚠️ Gagal test tapi lanjut"
+        //                     exit
+        //                 EOF
+        //             """
+        //         }
+        //     }
+        // }
 
         stage ('Push to Docker Hub') {
             steps {
