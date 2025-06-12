@@ -79,7 +79,7 @@ pipeline {
                         ssh -o StrictHostKeyChecking=no ${server} << EOF
                             docker stop wayshub-fe || true
                             docker rm wayshub-fe || true
-                            docker run -d --name wayshub-fe -p 3000:3000 ${image}
+                            docker run -d --name wayshub-fe --network wayshub-network -p 3000:3000 ${image}
                             echo "🚀 Deployed frontend!"
                             exit
                         EOF
