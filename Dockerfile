@@ -1,6 +1,7 @@
 FROM node:13
 WORKDIR /home/wayshub
-COPY . .
+COPY package*.json ./
 RUN npm install
+COPY . .
 EXPOSE 3000
-CMD ["npm","start"]
+CMD ["npm", "start"]
