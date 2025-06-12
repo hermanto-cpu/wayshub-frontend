@@ -1,6 +1,6 @@
 def secret = 'totywan-vps'
 def server = 'totywan@103.127.137.206'
-def directory = '/home/totywan/wayshub-frontend'
+def directory = '/home/totywan/dumbways-app/wayshub-frontend'
 def branch = 'main'
 def image = 'totywan/wayshub-frontend13alpine'
 
