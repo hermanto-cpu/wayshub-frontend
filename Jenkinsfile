@@ -55,6 +55,18 @@ pipeline {
         // }
         //
 
+          stage ('Test Deployment (Spider)') {
+            steps {
+                sshagent([secret]) {
+                    sh """
+                        ssh ${server} << EOF
+                            wget --spider --no-check-certificate -q https://hermanto.studentdumbways.my.id || exit 1
+                        EOF
+                    """
+                }
+            }
+        }
+
         stage ('Push to Docker Hub') {
             steps {
                 sshagent([secret]) {
