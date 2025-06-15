@@ -55,17 +55,20 @@ pipeline {
         // }
         //
 
-          stage ('Test Deployment (Spider)') {
+       stage ('Smoke Test Frontend') {
             steps {
                 sshagent([secret]) {
                     sh """
-                        ssh ${server} << EOF
-                            wget --spider --no-check-certificate -q https://hermanto.studentdumbways.my.id || exit 1
+                        ssh -o StrictHostKeyChecking=no ${server} << EOF
+                            wget --spider --server-response http://hermanto.studentdumbways.my.id || exit 1
+                            echo "✅ Frontend up & reachable"
+                            exit
                         EOF
                     """
                 }
             }
         }
+
 
         stage ('Push to Docker Hub') {
             steps {
